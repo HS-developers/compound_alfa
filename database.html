@@ -182,7 +182,6 @@
       padding: 0 8px;
       box-sizing: border-box;
     }
-    /* جدول جديد متطور */
     table {
       width: 100vw;
       min-width: 1100px;
@@ -234,12 +233,10 @@
     tr:last-child td {
       border-bottom: none;
     }
-    /* خطوط فاصلة دائرية للأطراف */
     table tr:first-child th:first-child { border-top-right-radius: 26px; }
     table tr:first-child th:last-child { border-top-left-radius: 26px; }
     table tr:last-child td:first-child { border-bottom-right-radius: 26px; }
     table tr:last-child td:last-child { border-bottom-left-radius: 26px; }
-    /* تأثير ظل خفيف */
     table tr td, table tr th {
       box-shadow: 0 1px 4px #818cf822 inset;
     }
@@ -392,7 +389,6 @@
           updateCount(0);
           return;
         }
-        let i = 1;
         Object.values(data).forEach(child => {
           allChildren.push(child);
         });
@@ -407,6 +403,11 @@
       const tableBody = document.getElementById("tableBody");
       tableBody.innerHTML = "";
       let i = 1;
+      if (!dataArr.length) {
+        tableBody.innerHTML = "<tr><td colspan='8' style='color:#e11d48;font-weight:bold;'>لا توجد بيانات مطابقة للتصفية</td></tr>";
+        updateCount(0);
+        return;
+      }
       dataArr.forEach(child => {
         tableBody.innerHTML += `<tr>
           <td>${i++}</td>
@@ -420,9 +421,6 @@
         </tr>`;
       });
       updateCount(dataArr.length);
-      if (!dataArr.length) {
-        tableBody.innerHTML = "<tr><td colspan='8'>لا توجد بيانات في هذا النطاق</td></tr>";
-      }
     }
 
     function updateCount(n) {
@@ -431,13 +429,22 @@
 
     function filterByDate(e) {
       e.preventDefault();
-      const from = document.getElementById("fromDate").value;
-      const to = document.getElementById("toDate").value;
+      const fromInput = document.getElementById("fromDate");
+      const toInput = document.getElementById("toDate");
+      let from = fromInput.value;
+      let to = toInput.value;
+
+      // إصلاح صيغة التواريخ المدخلة يدويًا (مثلاً 31/12/2013)
+      if (from && from.includes('/')) {
+        const parts = from.split('/');
+        if (parts.length === 3) from = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
+      if (to && to.includes('/')) {
+        const parts = to.split('/');
+        if (parts.length === 3) to = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
+
       let filtered = allChildren;
-
-      // Debugging: تأكد أن الدالة تعمل وأن القيم صحيحة
-      // console.log("From:", from, "To:", to, "Data:", allChildren);
-
       if (from) {
         filtered = filtered.filter(child => child.birthDate && child.birthDate >= from);
       }
