@@ -435,6 +435,9 @@
       const to = document.getElementById("toDate").value;
       let filtered = allChildren;
 
+      // Debugging: تأكد أن الدالة تعمل وأن القيم صحيحة
+      // console.log("From:", from, "To:", to, "Data:", allChildren);
+
       if (from) {
         filtered = filtered.filter(child => child.birthDate && child.birthDate >= from);
       }
