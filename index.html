@@ -60,18 +60,30 @@
       text-align: center;
       filter: drop-shadow(0 1px 6px #818cf8aa);
     }
+
     .main-content {
       flex: 1 0 auto;
-      max-width: 550px;
-      margin: 44px auto 16px auto;
+      max-width: 490px;
+      min-width: 330px;
+      width: 96vw;
+      margin: 40px auto 16px auto;
       background: linear-gradient(120deg,#fff 80%,#f3e8ff 100%);
       border-radius: 32px;
       box-shadow: 0 7px 38px #6366f188, 0 2px 16px #e11d4899;
-      padding: 32px 20px 30px 20px;
+      padding: 34px 36px 24px 36px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      transition: all 0.2s;
+    }
+    @media (max-width: 600px) {
+      .main-content {
+        max-width: 99vw;
+        min-width: unset;
+        padding: 18px 4vw 14px 4vw;
+        margin: 18px 2vw 14px 2vw;
+      }
     }
     h2 {
       text-align:center;
@@ -84,32 +96,43 @@
     }
     form {
       width: 100%;
-      max-width: 340px;
+      max-width: 390px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 13px;
+      gap: 14px;
+      background: none;
+      padding: 0;
     }
     label {
       font-weight: 700;
-      font-size: 1.07em;
+      font-size: 1.11em;
       margin-bottom: 5px;
       color: #6366f1;
       letter-spacing: 0.5px;
       text-shadow: 0 1px 8px #818cf822;
+      margin-top: 5px;
+      text-align: right;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 6px;
     }
     input {
-      padding: 11px;
-      border-radius: 11px;
+      padding: 16px 15px;
+      border-radius: 13px;
       border: 2px solid #c7d2fe;
       font-family: 'Tajawal', 'Cairo', sans-serif;
-      font-size: 1.1em;
+      font-size: 1.15em;
       background: #f8fbff;
       transition: box-shadow 0.23s, border 0.23s;
       box-sizing: border-box;
       outline: none;
       box-shadow: 0 2px 8px #818cf822;
-      margin-bottom: 7px;
+      margin-bottom: 0;
+      margin-top: 2px;
+      text-align: right;
     }
     input:focus {
       border: 2px solid #5eead4;
@@ -121,17 +144,19 @@
       color: white;
       border: none;
       border-radius: 15px;
-      font-size: 1.08em;
+      font-size: 1.12em;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.17s cubic-bezier(.4,2,.4,1);
       box-shadow: 0 4px 18px #e11d4844, 0 1px 10px #f59e4222;
       letter-spacing: 1px;
-      padding: 13px 10px;
-      margin-top: 8px;
+      padding: 16px 0;
+      margin-top: 10px;
       outline: none;
       position: relative;
       overflow: hidden;
+      width: 100%;
+      min-width: 0;
     }
     .submit-btn:active, .submit-btn:focus {
       background: linear-gradient(90deg, #f59e42 0%, #e11d48 100%);
@@ -142,7 +167,7 @@
     .msg {
       text-align:center;
       font-size:1.07em;
-      margin:10px 0 0 0;
+      margin:12px 0 0 0;
       min-height:24px;
       font-weight:bold;
       color: #e11d48;
@@ -196,10 +221,14 @@
   </header>
   <div class="main-content">
     <form id="adminLoginForm" autocomplete="off">
-      <label for="email">البريد الإلكتروني</label>
-      <input type="email" id="email" required placeholder="البريد الخاص بالمشرف" />
-      <label for="password">كلمة السر</label>
-      <input type="password" id="password" required minlength="6" autocomplete="current-password" />
+      <div class="input-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" required placeholder="البريد الخاص بالمشرف" />
+      </div>
+      <div class="input-group">
+        <label for="password">كلمة السر</label>
+        <input type="password" id="password" required minlength="6" autocomplete="current-password" />
+      </div>
       <button type="submit" class="submit-btn">دخول</button>
       <div id="msg" class="msg"></div>
     </form>
