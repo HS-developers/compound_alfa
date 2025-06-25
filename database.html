@@ -275,7 +275,7 @@
     }
     footer {
       background: linear-gradient(90deg,#6366f1 60%, #5eead4 100%);
-      font-size: 10px;
+      font-size: 9px;
       color: #fff;
       font-family: 'Cairo', sans-serif;
       text-align: center;
@@ -344,7 +344,7 @@
     </div>
   </div>
   <footer>
-    جميع الحقوق محفوظة © 2025 Genius Tech Co
+    جميع الحقوق محفوظة © 2025 Genius Tech 
   </footer>
   <script>
     // Firebase config
@@ -362,7 +362,6 @@
     const auth = firebase.auth();
     const db = firebase.database();
 
-    // السماح فقط للمشرف الحقيقي
     const ADMIN_EMAIL = "user_admin77@genz.com";
     auth.onAuthStateChanged(function(user){
       if(!user || user.email !== ADMIN_EMAIL){
@@ -434,7 +433,6 @@
       let from = fromInput.value;
       let to = toInput.value;
 
-      // إصلاح صيغة التواريخ المدخلة يدويًا (مثلاً 31/12/2013)
       if (from && from.includes('/')) {
         const parts = from.split('/');
         if (parts.length === 3) from = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
@@ -460,7 +458,6 @@
       renderTable(allChildren);
     }
 
-    // دالة تصدير CSV مع دعم BOM ولف أرقام الهواتف كـ نص
     function exportTableToCSV() {
       var csv = [];
       var rows = document.querySelectorAll("#dataTable tr");
