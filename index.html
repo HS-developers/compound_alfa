@@ -188,7 +188,7 @@
     }
     footer {
       background: linear-gradient(90deg,#6366f1 60%, #5eead4 100%);
-      font-size: 10px;
+      font-size: 9px;
       color: #fff;
       font-family: 'Cairo', sans-serif;
       text-align: center;
@@ -210,7 +210,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 </head>
 <body>
-  <!-- الهيدر المضاف -->
   <header>
     <div class="header-row">
       <div class="header-title">
@@ -234,7 +233,7 @@
     </form>
   </div>
   <footer>
-    جميع الحقوق محفوظة © 2025 Genius Tech Co
+    جميع الحقوق محفوظة © 2025 Genius Tech 
   </footer>
   <script>
     // Firebase config
@@ -268,7 +267,6 @@
         msg.className = "msg err";
       }
     };
-    // إذا كان المستخدم مسجّل فعلاً، يذهب مباشرة لصفحة البيانات
     auth.onAuthStateChanged(function(user){
       if(user) window.location.href = "database.html";
     });
