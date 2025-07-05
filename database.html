@@ -296,6 +296,30 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyD3FvIT1JscjY35XozIq-3yCfaZf4awa6k",
+      authDomain: "genz-database.firebaseapp.com",
+      databaseURL: "https://genz-database-default-rtdb.firebaseio.com",
+      projectId: "genz-database",
+      storageBucket: "genz-database.firebasestorage.app",
+      messagingSenderId: "624128432502",
+      appId: "1:323107285981:web:c41ab8052f2f8fd7e60257",
+      measurementId: "G-BW2MFF4VLE"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+    // حماية الصفحة: إذا لم يكن المستخدم مسجل دخول يرجع إلى الرئيسية
+    firebase.auth().onAuthStateChanged(function(user){
+      if(!user){
+        window.location.href = "index.html";
+      }
+    });
+
+    const auth = firebase.auth();
+    const db = firebase.database();
+  </script>
 </head>
 <body>
   <header>
@@ -347,30 +371,8 @@
     جميع الحقوق محفوظة © 2025 Genius Tech 
   </footer>
   <script>
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyD3FvIT1JscjY35XozIq-3yCfaZf4awa6k",
-      authDomain: "genz-database.firebaseapp.com",
-      databaseURL: "https://genz-database-default-rtdb.firebaseio.com",
-      projectId: "genz-database",
-      storageBucket: "genz-database.firebasestorage.app",
-      messagingSenderId: "624128432502",
-      appId: "1:624128432502:web:c41ab8052f2f8fd7e60257",
-      measurementId: "G-BW2MFF4VLE"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.database();
-
-    const ADMIN_EMAIL = "user_admin77@genz.com";
-    auth.onAuthStateChanged(function(user){
-      if(!user || user.email !== ADMIN_EMAIL){
-        window.location.href = "admin-login.html";
-      }
-    });
-
     function logout() {
-      auth.signOut().then(()=>window.location.href="admin-login.html");
+      firebase.auth().signOut().then(()=>window.location.href="index.html");
     }
 
     let allChildren = [];
@@ -378,7 +380,7 @@
     function fetchData(callback) {
       document.getElementById("msg").textContent = "جارٍ تحميل البيانات...";
       const tableBody = document.getElementById("tableBody");
-      db.ref("children").once("value", function(snapshot) {
+      firebase.database().ref("children").once("value", function(snapshot) {
         const data = snapshot.val();
         tableBody.innerHTML = "";
         allChildren = [];
